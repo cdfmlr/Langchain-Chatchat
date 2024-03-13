@@ -170,10 +170,9 @@ def dialogue_page(api: ApiRequest, is_lite: bool = False):
                 st.session_state["cur_llm_model"] = st.session_state.llm_model
 
         def llm_model_format_func(x):
-            x = model_name_convention(x)
             if x in running_models:
-                return f"{x} (Running)"
-            return x
+                return f"{model_name_convention(x)} (Running)"
+            return model_name_convention(x)
 
         running_models = list(api.list_running_models())
         available_models = []
