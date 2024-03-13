@@ -7,6 +7,7 @@ import os
 import re
 import time
 from configs import (TEMPERATURE, HISTORY_LEN, PROMPT_TEMPLATES, LLM_MODELS,
+                     APP_NAME, FRONTEND_MODEL_NAME_CONVENTIONS,
                      DEFAULT_KNOWLEDGE_BASE, DEFAULT_SEARCH_ENGINE, SUPPORT_AGENT_MODEL)
 from server.knowledge_base.utils import LOADER_DICT
 import uuid
@@ -96,6 +97,16 @@ def parse_command(text: str, modal: Modal) -> bool:
     return False
 
 
+def model_name_convention(model_name: str) -> str:
+    """
+    将模型名称转换为前端显示的名称.
+    Set by configs/customize_config.py > FRONTEND_MODEL_NAME_CONVENTIONS
+    """
+    if model_name in FRONTEND_MODEL_NAME_CONVENTIONS:
+        return FRONTEND_MODEL_NAME_CONVENTIONS[model_name]
+    return model_name
+
+
 def dialogue_page(api: ApiRequest, is_lite: bool = False):
     st.session_state.setdefault("conversation_ids", {})
     st.session_state["conversation_ids"].setdefault(chat_box.cur_chat_name, uuid.uuid4().hex)
@@ -103,9 +114,12 @@ def dialogue_page(api: ApiRequest, is_lite: bool = False):
     default_model = api.get_default_llm_model()[0]
 
     if not chat_box.chat_inited:
+        _app_name = APP_NAME or " [`Langchain-Chatchat`](https://github.com/chatchat-space/Langchain-Chatchat)"
+        _model_name = model_name_convention(default_model)
+        
         st.toast(
-            f"欢迎使用 [`Langchain-Chatchat`](https://github.com/chatchat-space/Langchain-Chatchat) ! \n\n"
-            f"当前运行的模型`{default_model}`, 您可以开始提问了."
+            f"欢迎使用{_app_name}! \n\n"
+            f"当前运行的模型`{_model_name}`, 您可以开始提问了。"
         )
         chat_box.init_session()
 
@@ -156,6 +170,7 @@ def dialogue_page(api: ApiRequest, is_lite: bool = False):
                 st.session_state["cur_llm_model"] = st.session_state.llm_model
 
         def llm_model_format_func(x):
+            x = model_name_convention(x)
             if x in running_models:
                 return f"{x} (Running)"
             return x
