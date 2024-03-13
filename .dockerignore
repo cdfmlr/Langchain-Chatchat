@@ -1,0 +1,27 @@
+configs/
+knowledge_base/
+
+# Ignore common Python files and directories
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# Ignore development and testing files
+.venv/
+Dockerfile
+.dockerignore
+.gitignore
+.gitmodules
+.git/
+.vscode/
+.idea/
+*.swp
+*.swo
+*.log
+*.tmp
+
+# Ignore system and temporary files
+.DS_Store
+Thumbs.db
+desktop.ini
