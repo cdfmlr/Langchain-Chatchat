@@ -5,7 +5,7 @@ from webui_pages.dialogue.dialogue import dialogue_page, chat_box
 from webui_pages.knowledge_base.knowledge_base import knowledge_base_page
 import os
 import sys
-from configs import VERSION
+from configs import VERSION, APP_NAME, LOGO_HEAD_LONG_PATH, LOGO_BOT_SQUARE_PATH
 from server.utils import api_address
 
 
@@ -14,14 +14,18 @@ api = ApiRequest(base_url=api_address())
 if __name__ == "__main__":
     is_lite = "lite" in sys.argv
 
+    app_name = APP_NAME or "Langchain-Chatchat WebUI"
+    logo_head_long = LOGO_HEAD_LONG_PATH or os.path.join("img", "logo-long-chatchat-trans-v2.png")
+    logo_bot_square = LOGO_BOT_SQUARE_PATH or os.path.join("img", "chatchat_icon_blue_square_v2.png")
+
     st.set_page_config(
-        "Langchain-Chatchat WebUI",
-        os.path.join("img", "chatchat_icon_blue_square_v2.png"),
+        app_name,
+        logo_bot_square,
         initial_sidebar_state="expanded",
         menu_items={
-            'Get Help': 'https://github.com/chatchat-space/Langchain-Chatchat',
-            'Report a bug': "https://github.com/chatchat-space/Langchain-Chatchat/issues",
-            'About': f"""欢迎使用 Langchain-Chatchat WebUI {VERSION}！"""
+            #'Get Help': 'https://github.com/chatchat-space/Langchain-Chatchat',
+            #'Report a bug': "https://github.com/chatchat-space/Langchain-Chatchat/issues",
+            'About': f"""欢迎使用 {app_name} {VERSION}！"""
         }
     )
 
@@ -38,10 +42,7 @@ if __name__ == "__main__":
 
     with st.sidebar:
         st.image(
-            os.path.join(
-                "img",
-                "logo-long-chatchat-trans-v2.png"
-            ),
+            logo_head_long,
             use_column_width=True
         )
         st.caption(

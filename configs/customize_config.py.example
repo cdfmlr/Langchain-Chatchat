@@ -1,0 +1,12 @@
+"""
+This file is used to set the logo / name etc. of the chatchat web ui.
+Every thing is optional, left empty ('') to fall back to default values.
+"""
+
+# web ui 的 title
+APP_NAME = ''  # Langchain-Chatchat WebUI
+
+# logo 图片
+LOGO_HEAD_LONG_PATH = ''    # /app/img/logo-long-chatchat-trans-v2.png
+LOGO_BOT_SQUARE_PATH = ''   # /app/img/chatchat_icon_blue_square_v2.png
+LOGO_WEB_FAVICON_PATH = ''  # /app/server/static/favicon.ico
