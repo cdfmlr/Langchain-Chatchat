@@ -7,14 +7,14 @@ import os
 import re
 import time
 from configs import (TEMPERATURE, HISTORY_LEN, PROMPT_TEMPLATES, LLM_MODELS,
-                     APP_NAME, FRONTEND_MODEL_NAME_CONVENTIONS,
+                     APP_NAME, FRONTEND_MODEL_NAME_CONVENTIONS, LOGO_BOT_SQUARE_PATH,
                      DEFAULT_KNOWLEDGE_BASE, DEFAULT_SEARCH_ENGINE, SUPPORT_AGENT_MODEL)
 from server.knowledge_base.utils import LOADER_DICT
 import uuid
 from typing import List, Dict
 
 chat_box = ChatBox(
-    assistant_avatar=os.path.join(
+    assistant_avatar=LOGO_BOT_SQUARE_PATH or os.path.join(
         "img",
         "chatchat_icon_blue_square_v2.png"
     )
