@@ -56,6 +56,8 @@ def get_ChatOpenAI(
     config = get_model_worker_config(model_name)
     if model_name == "openai-api":
         model_name = config.get("model_name")
+    elif config.get("model_name"):  # appreicate the model_name in config, to support custom openai-api models
+        model_name = config.get("model_name")
     ChatOpenAI._get_encoding_model = MinxChatOpenAI.get_encoding_model
     model = ChatOpenAI(
         streaming=streaming,
@@ -84,6 +86,8 @@ def get_OpenAI(
 ) -> OpenAI:
     config = get_model_worker_config(model_name)
     if model_name == "openai-api":
+        model_name = config.get("model_name")
+    elif config.get("model_name"):  # appreicate the model_name in config, to support custom openai-api models
         model_name = config.get("model_name")
     model = OpenAI(
         streaming=streaming,
