@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
     wget \
     curl \
     vim \
+    libglib2.0-0 libgl1-mesa-glx \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
